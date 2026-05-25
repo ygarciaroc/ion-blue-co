@@ -3,45 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ion Blue Co. | Cyber-Engineering Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <title>Star Systems | Hardware Engineering & Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --baby-blue: #E3F2FD;
-            --soft-blue: #B3E5FC;
-            --electric-blue: #00B0FF;
-            --glass-white: rgba(255, 255, 255, 0.6);
-            --y2k-pink: #F8BBD0; /* Subtle feminine accent */
-            --text-main: #37474F;
+            --bg-base: #E8ECEF;          /* Smooth, matte platinum - easy on the eyes */
+            --card-bg: rgba(245, 247, 248, 0.75); /* Soft brushed warm white */
+            --text-main: #2C3E46;        /* Serious, deep slate steel */
+            --text-muted: #5A6E75;       /* Muted steel for secondary text */
+            --accent-blue: #7097A8;      /* Editorial muted slate blue */
+            --accent-pink: #E8B4B8;      /* Sophisticated, dusty rose/pink accent */
+            --border-color: rgba(255, 255, 255, 0.6);
+            --shadow-sm: 0 4px 20px rgba(112, 151, 168, 0.08);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Outfit', sans-serif; /* Softer, rounded font */
-            background-color: var(--baby-blue);
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-base);
             color: var(--text-main);
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        /* --- Ion Trace Animation Background --- */
-        #ion-canvas {
+        /* --- Low-Stress Signal Trace Canvas --- */
+        #bg-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            opacity: 0.5;
+            opacity: 0.4;
+            pointer-events: none;
         }
 
+        /* --- Header / Navigation --- */
         header {
-            padding: 1.5rem 8%;
+            padding: 1.2rem 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--glass-white);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid rgba(255,255,255,0.3);
+            background: rgba(232, 236, 239, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
             position: sticky;
             top: 0; z-index: 1000;
         }
@@ -49,217 +53,484 @@
         .logo { 
             font-family: 'Space Grotesk'; 
             font-weight: 700; 
-            color: var(--electric-blue); 
+            color: var(--text-main); 
             text-decoration: none;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
+            letter-spacing: -0.5px;
         }
+
+        .logo span { color: var(--accent-pink); }
 
         nav a {
-            margin-left: 20px;
+            margin-left: 28px;
             text-decoration: none;
-            color: var(--text-main);
-            font-weight: 600;
+            color: var(--text-muted);
+            font-weight: 500;
             font-size: 0.9rem;
-            transition: 0.3s;
+            transition: color 0.3s ease;
         }
 
-        nav a:hover { color: var(--electric-blue); text-shadow: 0 0 8px var(--soft-blue); }
+        nav a:hover, nav a.active { 
+            color: var(--text-main); 
+            border-bottom: 1px solid var(--accent-pink);
+        }
 
-        /* --- Y2K Hero --- */
+        /* --- Hero Section --- */
         .hero {
-            padding: 100px 8%;
+            padding: 120px 8% 80px;
             text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .hero h1 {
             font-family: 'Space Grotesk';
-            font-size: clamp(2.5rem, 10vw, 5rem);
-            color: #fff;
-            text-shadow: 4px 4px 0px var(--soft-blue);
-            margin-bottom: 10px;
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
+            color: var(--text-main);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
 
-        .hero p { font-weight: 400; color: var(--text-main); font-size: 1.2rem; }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--accent-blue);
+        }
+
+        .hero p { 
+            font-weight: 400; 
+            color: var(--text-muted); 
+            font-size: 1.15rem; 
+            letter-spacing: 0.3px;
+        }
 
         .btn {
             display: inline-block;
-            margin-top: 25px;
-            padding: 12px 35px;
-            background: white;
-            color: var(--electric-blue);
+            margin-top: 30px;
+            padding: 12px 38px;
+            background: var(--text-main);
+            color: #fff;
             text-decoration: none;
-            border-radius: 50px; /* Rounded pill shape */
-            font-weight: 700;
-            box-shadow: 0 4px 15px rgba(0, 176, 255, 0.2);
-            transition: 0.3s;
+            border-radius: 4px; /* Structured but clean corporate radius */
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s ease, background-color 0.2s ease;
         }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--soft-blue); }
+        .btn:hover { 
+            background: var(--accent-blue);
+            transform: translateY(-2px); 
+        }
 
-        /* --- Sections --- */
-        .section { padding: 80px 8%; }
+        /* --- Layout Structure --- */
+        .section { padding: 60px 8%; max-width: 1200px; margin: 0 auto; }
+        
+        .section-title {
+            font-family: 'Space Grotesk';
+            font-size: 1.6rem;
+            margin-bottom: 35px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.08);
+        }
+
         .glass-card {
-            background: var(--glass-white);
-            border: 1px solid rgba(255,255,255,0.4);
-            border-radius: 20px;
-            padding: 30px;
-            backdrop-filter: blur(5px);
-            margin-bottom: 20px;
-            transition: 0.3s;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow-sm);
         }
-        .glass-card:hover { background: rgba(255,255,255,0.8); }
 
-        /* --- Gallery --- */
+        /* --- Bio Grid --- */
+        .bio-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .bio-text p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--border-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* --- Catalog / Services Table --- */
+        .catalog-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .catalog-table th {
+            text-align: left;
+            padding: 15px 20px;
+            font-family: 'Space Grotesk';
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            border-bottom: 2px solid rgba(0,0,0,0.05);
+        }
+
+        .catalog-table td {
+            padding: 22px 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            vertical-align: top;
+        }
+
+        .catalog-table tr:last-child td { border-bottom: none; }
+
+        .service-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .service-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .service-meta {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--accent-blue);
+            text-align: right;
+        }
+
+        /* --- Work Showcase Gallery --- */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
         }
+        
         .gallery-item {
-            aspect-ratio: 1;
-            background: var(--soft-blue);
-            border-radius: 15px;
+            position: relative;
+            aspect-ratio: 4/3;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 8px;
             overflow: hidden;
-            border: 4px solid white;
-            cursor: pointer;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* --- Blog --- */
-        .blog-post {
-            border-bottom: 1px solid var(--soft-blue);
-            padding: 20px 0;
+        .gallery-item:hover {
+            transform: scale(1.02);
         }
-        .blog-post h3 { color: var(--electric-blue); font-size: 1.3rem; margin-bottom: 5px; }
-        .blog-post span { font-size: 0.8rem; color: #888; }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(44, 62, 70, 0.85));
+            padding: 20px;
+            color: #fff;
+        }
+
+        .gallery-caption h4 { font-family: 'Space Grotesk'; font-size: 1rem; }
+        .gallery-caption p { font-size: 0.8rem; opacity: 0.8; }
+
+        /* --- Blog / Notebook --- */
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .blog-card {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            transition: background 0.2s ease;
+        }
+
+        .blog-card:hover { background: rgba(255, 255, 255, 0.7); }
+
+        .blog-meta { font-size: 0.8rem; color: var(--accent-blue); font-weight: 600; text-transform: uppercase; }
+        .blog-card h3 { font-family: 'Space Grotesk'; font-size: 1.25rem; color: var(--text-main); margin: 8px 0; }
+        .blog-card p { font-size: 0.95rem; color: var(--text-muted); }
+
+        /* --- Strategic Alliance Banner --- */
+        .alliance-banner {
+            background: linear-gradient(135s, rgba(112, 151, 168, 0.1), rgba(232, 236, 239, 0.5));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .alliance-info h3 { font-family: 'Space Grotesk'; font-size: 1.4rem; margin-bottom: 6px; }
+        .alliance-info p { color: var(--text-muted); font-size: 0.95rem; }
+        
+        .alliance-capabilities {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .alliance-capabilities span {
+            background: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
 
         /* --- Footer --- */
-        footer { padding: 40px; text-align: center; font-size: 0.8rem; opacity: 0.7; }
+        footer {
+            padding: 60px 8% 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
 
+        footer p { margin-bottom: 8px; }
+
+        @media (max-width: 850px) {
+            .bio-layout, .blog-layout, .alliance-banner { grid-template-columns: 1fr; flex-direction: column; align-items: flex-start; }
+            .alliance-capabilities { flex-wrap: wrap; }
+            header { padding: 1.2rem 5%; }
+            .section { padding: 40px 5%; }
+        }
     </style>
 </head>
 <body>
 
-<canvas id="ion-canvas"></canvas>
+<canvas id="bg-canvas"></canvas>
 
 <header>
-    <a href="#" class="logo">ION BLUE <span>☆</span></a>
+    <a href="#" class="logo">STAR SYSTEMS <span>✦</span></a>
     <nav>
         <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#blog">Blog</a>
+        <a href="#catalog">Services</a>
+        <a href="#showcase">Showcase</a>
+        <a href="#notebook">Notebook</a>
         <a href="#contact">Contact</a>
     </nav>
 </header>
 
 <section class="hero">
-    <h1>Ion Blue Co.</h1>
-    <p>Silicon Engineer ✦ Power Systems ✦ Hardware Aesthetic</p>
-    <a href="#contact" class="btn">Say Hello!</a>
+    <h1>High-Performance Circuit Architecture meets <em>Refined Hardware Design</em></h1>
+    <p>Providing specialized engineering, CAD routing, and schema verification services for embedded infrastructure and power integrity deployment.</p>
+    <a href="mailto:your.email@here.com" class="btn">Initiate Consultation</a>
 </section>
 
 <section class="section" id="about">
     <div class="glass-card">
-        <h2 style="margin-bottom:15px; font-family:'Space Grotesk';">Digital Bio</h2>
-        <p>I'm Yamilet, an <strong>Electrical Engineering</strong> student at <strong>UTEP</strong>. From silicon rotations at <strong>Microsoft</strong> to PCB workflows at <strong>Siemens EDA</strong>, I blend hard-core technical engineering with a Y2K hardware aesthetic.</p>
-        <br>
-        <p>Holding a <strong>Texas Wireman License</strong>, I ensure my designs are safe, efficient, and pretty. Currently obsessing over Power Integrity and Q-Factor optimization.</p>
+        <h2 class="section-title">Corporate & Technical Profile</h2>
+        <div class="bio-layout">
+            <div class="bio-text">
+                <p>Star Systems is directed by Yamilet Rocha, an Electrical Engineering specialist balancing enterprise-scale high-speed silicon deployment with bespoke hardware consulting. My domain expertise bridges high-frequency signal spaces with complex power distribution topologies.</p>
+                <p>Through robust methodologies honed via deep engineering lifecycles at institutions like Microsoft and foundational academic engineering frameworks at UTEP, Star Systems ensures cleanroom-ready architectural integrity from primary simulation to localized manufacturing pipelines.</p>
+            </div>
+            <div>
+                <h4 style="font-family:'Space Grotesk'; font-size:1rem; margin-bottom:10px;">Core Competencies & Licensure</h4>
+                <div class="tag-container">
+                    <span class="tag">Power Integrity (PI)</span>
+                    <span class="tag">Signal Integrity (SI)</span>
+                    <span class="tag">Siemens EDA / Altium</span>
+                    <span class="tag">Embedded Systems</span>
+                    <span class="tag">Texas Wireman Licensed</span>
+                    <span class="tag">Cleanroom Certified</span>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<section class="section" id="gallery">
-    <h2 style="margin-bottom:30px; font-family:'Space Grotesk';">Visions & Visuals</h2>
+<section class="section" id="catalog">
+    <div class="glass-card" style="padding: 40px 20px;">
+        <h2 class="section-title" style="padding-left: 20px;">Capabilities & Service Catalog</h2>
+        <table class="catalog-table">
+            <thead>
+                <tr>
+                    <th>Service Class</th>
+                    <th style="text-align: right;">Parameters</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="service-name">Bespoke Circuit Design & Schematic Capture</div>
+                        <div class="service-desc">Complete multi-layer schematic architecture targeted for optimal signal isolation and compliance parameters.</div>
+                    </td>
+                    <td class="service-meta">Custom Quote</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="service-name">High-Density PCB Layout Routing</div>
+                        <div class="service-desc">Rigorous routing layout operations featuring impedance matching, precise via stack planning, and component distribution.</div>
+                    </td>
+                    <td class="service-meta">Per Project Base</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="service-name">CAD Modeling & Mechanical Integration</div>
+                        <div class="service-desc">3D physical hardware enclosure checking, component clearance verification, and enclosure-readiness modeling.</div>
+                    </td>
+                    <td class="service-meta">Hourly / Retainer</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section" id="showcase">
+    <h2 class="section-title">System Implementations</h2>
     <div class="gallery-grid">
-        <div class="gallery-item" style="background-image: url('car-restore.jpg'); background-size: cover;"></div>
-        <div class="gallery-item" style="background-image: url('pcb-layout.jpg'); background-size: cover;"></div>
-        <div class="gallery-item" style="background-image: url('solidworks-render.jpg'); background-size: cover;"></div>
-        <div class="gallery-item" style="background-image: url('utep-lab.jpg'); background-size: cover;"></div>
+        <div class="gallery-item">
+            <div class="gallery-img" style="background-image: url('pcb-layout.jpg');"></div>
+            <div class="gallery-caption">
+                <h4>Multi-Layer Power Plane</h4>
+                <p>Optimization layout isolating sensitive signals.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img" style="background-image: url('solidworks-render.jpg');"></div>
+            <div class="gallery-caption">
+                <h4>3D Component Integration</h4>
+                <p>Mechanical verification constraints in CAD.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img" style="background-image: url('car-restore.jpg');"></div>
+            <div class="gallery-caption">
+                <h4>Automotive Power Arrays</h4>
+                <p>Custom high-current power routing configurations.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img" style="background-image: url('utep-lab.jpg');"></div>
+            <div class="gallery-caption">
+                <h4>Bio-Sensor Infrastructure</h4>
+                <p>Microelectrode array interface instrumentation.</p>
+            </div>
+        </div>
     </div>
 </section>
 
-<section class="section" id="blog">
-    <h2 style="margin-bottom:30px; font-family:'Space Grotesk';">Engineering Diary</h2>
-    <div class="glass-card">
-        <div class="blog-post">
-            <span>May 2026</span>
-            <h3>Power Factor & Chill: Q-Factor Basics</h3>
-            <p>Why reactive power is the "foam" on your electrical beer, and how I'm fixing it...</p>
+<section class="section" id="notebook">
+    <h2 class="section-title">Technical Papers & Notebooks</h2>
+    <div class="blog-layout">
+        <div class="blog-card">
+            <div class="blog-meta">May 2026 // System Tuning</div>
+            <h3>Power Factor Optimization & Q-Factor Core Mechanics</h3>
+            <p>An engineering deep dive into compensating reactive power components within compact embedded designs to curb system loss and overhead.</p>
         </div>
-        <div class="blog-post">
-            <span>April 2026</span>
-            <h3>Silicon Valley to El Paso: Internship Lessons</h3>
-            <p>What Microsoft taught me about signal integrity and high-speed hardware...</p>
+        <div class="blog-card">
+            <div class="blog-meta">April 2026 // Hardware Architecture</div>
+            <h3>High-Speed Signal Integrity Paradigms</h3>
+            <p>Practical cross-talk attenuation techniques derived from enterprise-level multi-layered silicon verification lifecycles.</p>
         </div>
     </div>
 </section>
 
-<section class="section" id="manufacturing" style="background: rgba(179, 229, 252, 0.3);">
-    <h2 style="font-family:'Space Grotesk';">Metalu CNC ✦ MX</h2>
-    <p style="margin: 10px 0 20px;">Mi alianza con Metalu CNC permite llevar mis diseños a la realidad física (Solo en México).</p>
-    <ul style="font-size: 0.9rem; list-style: '✧ '; padding-left: 20px;">
-        <li>Corte Láser de precisión</li>
-        <li>Maquila de laminados</li>
-        <li>Chasis de Aluminio</li>
-    </ul>
+<section class="section" id="contact">
+    <div class="alliance-banner">
+        <div class="alliance-info">
+            <h3>Metalu CNC Alliance ✦ MX Logistics</h3>
+            <p>Direct supply-chain coordination facilitating structural laser fabrication and raw metal chassis machining within Mexican trade sectors.</p>
+        </div>
+        <div class="alliance-capabilities">
+            <span>Precision Laser Trim</span>
+            <span>Aluminum Chassis Fab</span>
+            <span>Bilingual Verification</span>
+        </div>
+    </div>
 </section>
 
 <footer>
-    <p>ION BLUE CO. &copy; 2026 | Built by Yamilet Rocha</p>
-    <p>UTEP Engineering | Microsoft Silicon Alum | Texas License #XXXX</p>
+    <p>STAR SYSTEMS &copy; 2026 | All Rights Reserved.</p>
+    <p style="opacity: 0.6; font-size: 0.8rem;">B.S. Electrical Engineering Architecture Portfolio | Microsoft Silicon Engineering Rotations | Texas Wireman Identification #XXXX</p>
 </footer>
 
 <script>
-    // --- ION TRACE ANIMATION ---
-    const canvas = document.getElementById('ion-canvas');
+    // --- CALMING COZY SIGNAL WAVE ANIMATION (Low Stress, High Efficiency) ---
+    const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
-    let particles = [];
 
-    function init() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    });
+
+    let phase = 0;
+
+    function drawSignalWave() {
+        ctx.clearRect(0, 0, width, height);
+        
+        ctx.strokeStyle = '#7097A8'; // Accent Blue
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+
+        // Single fluid, continuous line that feels like an oscilloscope reading at absolute rest
+        for (let x = 0; x < width; x++) {
+            const y = height * 0.7 + Math.sin(x * 0.002 + phase) * Math.cos(x * 0.001 + phase) * 60;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        // Secondary subtle offset pink wave for that delicate palette balance
+        ctx.strokeStyle = '#E8B4B8'; 
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (let x = 0; x < width; x++) {
+            const y = height * 0.72 + Math.sin(x * 0.0015 + phase + 2) * 40;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        phase += 0.003; // Slow, sweeping movement frame rates
+        requestAnimationFrame(drawSignalWave);
     }
 
-    class Ion {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2 + 1;
-            this.speedX = Math.random() * 1 - 0.5;
-            this.speedY = Math.random() * 1 - 0.5;
-        }
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.size > 0.2) this.size -= 0.01;
-        }
-        draw() {
-            ctx.fillStyle = '#00B0FF';
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    function handleParticles() {
-        if (particles.length < 50) particles.push(new Ion());
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-            if (particles[i].size <= 0.2) {
-                particles.splice(i, 1);
-                i--;
-            }
-        }
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        handleParticles();
-        requestAnimationFrame(animate);
-    }
-
-    window.addEventListener('resize', init);
-    init();
-    animate();
+    drawSignalWave();
 </script>
 
 </body>
